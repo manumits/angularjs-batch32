@@ -9,6 +9,7 @@ app.controller('myCtrl', function($scope) {
 		
 		$scope.addLeader=function(){
 			$scope.leaders.push($scope.l);
+			console.log("jj");
 		};
 		
 });
