@@ -1,0 +1,42 @@
+<html>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<body  ng-app="myApp" >
+		<div ng-controller="myct">
+			{{x}}-{{y}}-{{z}}
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller("myct",function($scope,proser){			
+				$scope.x=proser.sub(10,20);
+				$scope.y=proser.mul(10,20);
+				proser.add(10,20,function(r){
+					$scope.z=r;
+				});
+			});
+			app.provider("proser",function(){
+			  var x="";
+				  this.abc1=function(cons){
+					  x=cons;
+					};
+					var su=function(a,b){
+						return a-b;
+					}
+					var mu=function(a,b){
+						return a*b;
+					}	
+					this.$get=function(){
+						return {
+								add:function(a,b,cb){
+											return cb(a-b+x);
+									},
+								sub:su,
+								mul:mu
+						}
+					}
+			});
+			app.config(['proserProvider',function(proserProvider){
+				proserProvider.abc1(99);
+			}]);
+		</script>
+	</body>
+</html>

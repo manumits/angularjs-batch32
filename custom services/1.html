@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body  ng-app="myApp" >
+
+<div ng-controller="personCtrl">
+
+First Number: <input type="text" ng-model="firstNumber"><br>
+Second Number: <input type="text" ng-model="secondNumber"><br>
+<br>
+Sum of first and second: {{total}}
+<button ng-click="justclick()">add</button>	
+
+<script>
+
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function($scope,arthServices) {
+    $scope.firstNumber = 10;
+    $scope.secondNumber = 20;
+		
+		$scope.justclick = function() {		
+				$scope.total=arthServices.sub($scope.firstNumber,$scope.secondNumber);
+    };
+});
+
+app.factory('arthServices', function() {
+    
+		var aso={};
+		
+		aso.add=function(a,b){
+			return parseInt(a)+parseInt(b);
+		};
+		aso.sub=function(a,b){
+			return parseInt(a)-parseInt(b);
+		}
+		return aso;
+});
+
+</script>
+
+</body>
+</html>

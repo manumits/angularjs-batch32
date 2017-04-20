@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<body  ng-app="myApp" >
+		<div ng-controller="myct1">
+			<h1>{{x}}</h1>
+			<h1>{{y}}</h1>
+		</div>
+		<script>
+			var ap=angular.module("myApp",[]);
+			ap.controller("myct1",function($scope,arth_pro){
+				$scope.x=arth_pro.add(10,20);
+				$scope.y=arth_pro.sub(90,20);
+			});
+			ap.provider("arth_pro",function(){
+				this.$get=function(){
+					return {
+						add:function(a,b){
+							return a+b;
+						},
+						sub:function(a,b){
+							return a-b;
+						},
+						mul:function(a,b){
+							return a*b;
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

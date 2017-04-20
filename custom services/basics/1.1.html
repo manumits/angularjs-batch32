@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body  ng-app="myApp" >
+
+	<div ng-controller="arthCtrl">
+		First Number: <input type="text" ng-model="firstNumber"><br>
+		Second Number: <input type="text" ng-model="secondNumber"><br>
+		<br>
+		Sum of first and second:<h1> {{total}}</h1>
+		<button ng-click="justclick()">add</button>	
+		<button ng-click="subclick()">Sub</button>	
+		<button ng-click="sqclick()">square</button>	
+		<button ng-click="cuclick()">cube</button>	
+	</div>
+	<script>
+		var app=angular.module("myApp",[]);
+		app.controller("arthCtrl",function($scope,arthSer,powSer){
+			$scope.firstNumber=10;
+			$scope.secondNumber=20;
+			$scope.subclick=function(){
+				$scope.total=arthSer.sub($scope.firstNumber,$scope.secondNumber);
+			}
+			$scope.justclick=function(){
+				$scope.total=arthSer.add($scope.firstNumber,$scope.secondNumber);
+			}
+			$scope.sqclick=function(){
+				$scope.total=powSer.square($scope.firstNumber);
+			}
+			$scope.cuclick=function(){
+				$scope.total=powSer.cube($scope.firstNumber);
+			}
+		});
+		
+		app.factory("arthSer",function(){		
+		var ob1={};		
+			ob1.add=function(x,y){
+				return parseInt(x)+parseInt(y);
+			}	
+				ob1.sub=function(a,b){
+					return parseInt(a)-parseInt(b);
+				}
+			return ob1;			
+		});
+		app.service("powSer",function(){					
+			this.square=function(x){
+				return parseInt(x)*parseInt(x);
+			}	
+			this.cube=function(x){
+				return parseInt(x)*parseInt(x)*parseInt(x);
+			}		
+		});
+		
+	</script>
